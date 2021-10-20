@@ -9,7 +9,7 @@ export const Home = ({navigation}: Props) => {
     return (
         <View style={styles.center}>
             <Text style={styles.text}>Gallery</Text>
-            <Button title='To Own' onPress={() => navigation.navigate('Own')} />
+            <Button title='To Marked' onPress={() => navigation.navigate('Marked')} />
         </View>
     )
 }

@@ -1,39 +1,54 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {Home} from "./src/screens/Home";
 import {Marked} from "./src/screens/Marked";
 import {OwnImg} from "./src/screens/OwnImg";
+import {CustomHeader} from "./src/navigation/CustomHeader";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {GalleryIcon} from "./src/svg/GalleryIcon";
+import {StarColor} from "./src/svg/StarColor";
 
-// const Section = () => {
-//   return (
-//       <SafeAreaView
-//           style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//           <Text style={{color: 'black'}}>Hello</Text>
-//       </SafeAreaView>
-//   );
-// };
-
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
-  return (
+    return (
       <NavigationContainer>
-          <Stack.Navigator>
-              <Stack.Screen name='Home' component={Home} />
-              <Stack.Screen name='Marked' component={Marked} />
-              <Stack.Screen name='Own' component={OwnImg} />
-          </Stack.Navigator>
+          <Tab.Navigator screenOptions={({route}) => ({
+              tabBarIcon: ({color}) => {
+                  if (route.name === 'Home') {
+                      return <GalleryIcon color={color} />
+                  } else if (route.name === 'Marked') {
+                      return <StarColor color={color} />
+                  } else return null
+              },
+              tabBarStyle: {
+                  borderTopRightRadius: 10,
+                  borderTopLeftRadius: 10,
+                  marginTop: -10
+              },
+              tabBarActiveTintColor: '#A10D99',
+              tabBarInactiveTintColor: '#949494',
+              tabBarLabelStyle: {
+                  fontWeight: '600',
+                  fontSize: 12,
+                  lineHeight: 16
+              }
+          })}>
+              <Tab.Screen name='Home' component={Home} options={{
+                  title: 'Все Изображения',
+                  tabBarLabel: 'Галерея',
+                  header: props => <CustomHeader title={props.options.title}/>,
+              }} />
+              <Tab.Screen name='Own' component={OwnImg} options={{
+                  title: 'IMg-321',
+                  tabBarItemStyle: {display: 'none'},
+                  header: props => <CustomHeader title={props.options.title} />
+              }} />
+              <Tab.Screen name='Marked' component={Marked} options={{
+                  title: 'Избранное',
+                  header: props => <CustomHeader title={props.options.title} />
+              }} />
+          </Tab.Navigator>
       </NavigationContainer>
   );
 };
