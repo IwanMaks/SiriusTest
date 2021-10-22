@@ -2,7 +2,7 @@ import React from "react";
 import {ScrollView, StyleSheet, View, Text, Platform} from 'react-native'
 import LinearGradient from "react-native-linear-gradient";
 import {Header, HeaderBackButton} from "@react-navigation/elements";
-import {useNavigation} from "@react-navigation/native";
+import {useNavigation, useRoute} from "@react-navigation/native";
 
 type HeaderProps = {
     title?: string
@@ -10,8 +10,10 @@ type HeaderProps = {
 
 export const CustomHeader = ({title = 'Введите title'}: HeaderProps) => {
     const nav = useNavigation()
+    const route:any = useRoute()
+
     return (
-        <View style={styles.headerWrap}>
+        <View style={route.name === 'Own' ? styles.headerWrapBlack : styles.headerWrapWhite}>
             <LinearGradient
                 colors={['#790598', '#BC1399']}
                 style={styles.gradientWrap}
@@ -21,15 +23,18 @@ export const CustomHeader = ({title = 'Введите title'}: HeaderProps) => {
                     <HeaderBackButton onPress={() => nav.canGoBack() && nav.goBack()} tintColor='#fff' style={{position: 'absolute', left: 15}} />
                 }
 
-                <Header title={title} headerTransparent={true} headerTitleStyle={styles.textStyle}/>
+                <Header title={route.name === 'Own' ? route.params?.title  : title} headerTransparent={true} headerTitleStyle={styles.textStyle}/>
             </LinearGradient>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    headerWrap: {
+    headerWrapWhite: {
         backgroundColor: '#fff'
+    },
+    headerWrapBlack: {
+        backgroundColor: '#222'
     },
     gradientWrap: {
         height: 56,
