@@ -45,14 +45,14 @@ export const setLikeDel = () => {
     return {type: ACTION.SET_LIKE_DEL}
 }
 
-export const setLikeDelSuccess = () => {
-    return {type: ACTION.SET_LIKE_DEL_SUCCESS}
+export const setLikeDelSuccess = (data:any) => {
+    return {type: ACTION.SET_LIKE_DEL_SUCCESS, likeDel: data}
 }
 
 export const setLikeDelError = () => {
     return {type: ACTION.SET_LIKE_DEL_FAILED}
 }
 
-export const fetchSetLikeDel = () => {
-    return {type: ACTION.FETCH_SET_LIKE_DEL}
+export const fetchSetLikeDel = ({id, typeSet}:any) => {
+    return {type: ACTION.FETCH_SET_LIKE_DEL, id, typeSet}
 }

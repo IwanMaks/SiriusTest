@@ -4,11 +4,14 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {RootStackParamList} from "./RootStackPrams";
 import {Heart} from "../svg/Heart";
 import {Trash} from "../svg/Trash";
+import {useDispatch} from "react-redux";
+import {fetchSetLikeDel} from "../store/actions/imgs";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Own'>;
 
-export const OwnImg = ({route}: Props) => {
-    const {url, like}:any = route.params
+export const OwnImg = ({route, navigation}: Props) => {
+    const {url, like, id}:any = route.params
+    const dispatch = useDispatch()
 
     return (
         <View style={styles.center}>
@@ -16,13 +19,16 @@ export const OwnImg = ({route}: Props) => {
                 uri: url
             }} style={styles.img}/>
             <View style={styles.buttonWrap}>
-                <TouchableOpacity style={styles.topButton} activeOpacity={0.7}>
+                <TouchableOpacity style={styles.topButton} activeOpacity={0.7} onPress={() => dispatch(fetchSetLikeDel({id: id, typeSet: 'like'}))}>
                     <View style={styles.textWrap}>
                         <Heart filled={like} mini={false} />
                         <Text style={styles.textButton}>{like ? 'Убрать из избранного' : 'Добавить в избранное'}</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.bottomButton} activeOpacity={0.7}>
+                <TouchableOpacity style={styles.bottomButton} activeOpacity={0.7} onPress={() => {
+                    dispatch(fetchSetLikeDel({id: id, typeSet: 'del'}))
+                    navigation.goBack()
+                }}>
                     <View style={styles.textWrap}>
                         <Trash />
                         <Text style={styles.textButton}>Удалить изображение</Text>

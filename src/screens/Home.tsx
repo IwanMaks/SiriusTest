@@ -29,18 +29,19 @@ export const Home = ({navigation}: Props) => {
 
     const allImg = useAppSelector(state => state.imgs.url)
     const loading = useAppSelector(state => state.imgs.loading)
-    const likeDel = useAppSelector(state => state.imgs.likeDel) || {}
+    // const mok = useAppSelector(state => state.imgs.likeDel)
+    console.log(mok)
     let img;
 
-    if (allImg && allImg.length !== 0) {
-        img = allImg.filter((el: { id: string | number; }) => mok[el.id] !== 'del')
+    if (allImg && allImg.length !== 0 && mok !== {} && mok !== null && mok !== undefined) {
+        img = allImg.filter((el: { id: string | number; }) => mok[el.id + ''] !== 'del')
     }
 
 
     if (loading) {
         return (
             <View style={styles.center}>
-                <ActivityIndicator color='#000000' />
+                <ActivityIndicator color='#000' />
             </View>
         )
     }

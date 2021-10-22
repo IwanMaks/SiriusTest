@@ -12,6 +12,7 @@ type AppImageProps = {
 
 type ParamsType = {
     url: string,
+    id: string | number,
     like: boolean,
     title: string | number
 }
@@ -21,6 +22,7 @@ export const AppImage = ({item, nav, like=false}:AppImageProps) => {
         <TouchableOpacity onPress={() => {
             const params: ParamsType = {
                 url: item.fullImg,
+                id: item.id,
                 like: like,
                 title: item.id
             }
