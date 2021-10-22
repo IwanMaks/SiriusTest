@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
-import {View, Text, StyleSheet, Button, Image, ActivityIndicator, FlatList} from "react-native";
+import {View, StyleSheet, ActivityIndicator, FlatList, Text} from "react-native";
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {RootStackParamList} from "./RootStackPrams";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {fetchImg, fetchLikeDel} from "../store/actions/imgs";
 import {AppImage} from "../components/AppImage";
 import {useAppSelector} from "../../hooks";
@@ -17,6 +17,7 @@ export const Home = ({navigation}: Props) => {
         dispatch(fetchLikeDel())
     }, [dispatch])
 
+    //моковые данные для проверки отображения
     const mok = {
         '3464632': 'like',
         '3509971': 'like',
@@ -46,12 +47,18 @@ export const Home = ({navigation}: Props) => {
 
     return (
         <View style={{padding: 15}}>
+            {/*FlatList используется для оптимизации, так как количество картинок может быть достаточно большим*/}
             <FlatList
                 data={img}
                 renderItem={({item}) => <AppImage item={item} nav={navigation} like={mok[item.id] === 'like'} />}
                 keyExtractor={item => item.id}
                 numColumns={4}
                 columnWrapperStyle={{justifyContent: 'flex-start'}}
+                ListEmptyComponent={() => (
+                    <View style={styles.center}>
+                        <Text style={styles.text}>Что-то пошло не так =(</Text>
+                    </View>
+                )}
             />
         </View>
     )
@@ -64,7 +71,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     text: {
-        color: 'black'
+        color: 'black',
+        fontSize: 20
     },
     img: {
         width: 66,

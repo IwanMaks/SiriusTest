@@ -1,15 +1,30 @@
 import React from "react";
-import {StyleSheet, View, Image, ImageBackground, Text, Dimensions, TouchableOpacity} from 'react-native'
+import {StyleSheet, ImageBackground, Dimensions, TouchableOpacity} from 'react-native'
 import {Heart} from "../svg/Heart";
+import {AppImageType} from "../store/types";
 
-export const AppImage = ({item, nav, like=false}:any) => {
+
+type AppImageProps = {
+    item: AppImageType,
+    nav: any,
+    like?: boolean
+}
+
+type ParamsType = {
+    url: string,
+    like: boolean,
+    title: string | number
+}
+
+export const AppImage = ({item, nav, like=false}:AppImageProps) => {
     return (
         <TouchableOpacity onPress={() => {
-            nav.navigate('Own', {
+            const params: ParamsType = {
                 url: item.fullImg,
                 like: like,
                 title: item.id
-            })
+            }
+            nav.navigate('Own', params)
         }}>
             <ImageBackground source={{uri: item.smallImg}} style={styles.container} imageStyle={{borderRadius: 10}} >
                 {like && <Heart />}

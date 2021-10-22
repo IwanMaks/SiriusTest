@@ -1,10 +1,12 @@
 //Запрос картинок с api
+import {ACTION} from "../types";
+
 export const loadImg = () => {
-    return {type: 'LOAD_IMG'}
+    return {type: ACTION.LOAD_IMG}
 }
 
 export const loadImgSuccess = (data: any) => {
-    return {type: 'LOAD_IMG_SUCCESS', url: data.map((item:any) => (
+    return {type: ACTION.LOAD_IMG_SUCCESS, url: data.map((item:any) => (
         {
             id: item.id,
             smallImg: item.src.tiny,
@@ -14,43 +16,43 @@ export const loadImgSuccess = (data: any) => {
 }
 
 export const loadImgError = () => {
-    return {type: 'LOAD_IMG_FAILED'}
+    return {type: ACTION.LOAD_IMG_FAILED}
 }
 
 export const fetchImg = () => {
-    return {type: 'FETCH_IMG'}
+    return {type: ACTION.FETCH_IMG}
 }
 
 //Запрос объекта о удалённых и лайкнутых фото
 export const getLikeDelImg = () => {
-    return {type: 'LOAD_LIKE_DEL'}
+    return {type: ACTION.LOAD_LIKE_DEL}
 }
 
 export const getLikeDelImgSuccess = (data: any) => {
-    return {type: 'LOAD_LIKE_DEL_SUCCESS', likeDel: data}
+    return {type: ACTION.LOAD_LIKE_DEL_SUCCESS, likeDel: data}
 }
 
 export const getLikeDelImgError = () => {
-    return {type: 'LOAD_LIKE_DEL_FAILED'}
+    return {type: ACTION.LOAD_LIKE_DEL_FAILED}
 }
 
 export const fetchLikeDel = () => {
-    return {type: 'FETCH_LIKE_DEL'}
+    return {type: ACTION.FETCH_LIKE_DEL}
 }
 
 //Установка новых значение для удаления и лайков
 export const setLikeDel = () => {
-    return {type: 'SET_LIKE_DEL'}
+    return {type: ACTION.SET_LIKE_DEL}
 }
 
 export const setLikeDelSuccess = () => {
-    return {type: 'SET_LIKE_DEL_SUCCESS'}
+    return {type: ACTION.SET_LIKE_DEL_SUCCESS}
 }
 
 export const setLikeDelError = () => {
-    return {type: 'SET_LIKE_DEL_FAILED'}
+    return {type: ACTION.SET_LIKE_DEL_FAILED}
 }
 
 export const fetchSetLikeDel = () => {
-    return {type: 'FETCH_SET_LIKE_DEL'}
+    return {type: ACTION.FETCH_SET_LIKE_DEL}
 }

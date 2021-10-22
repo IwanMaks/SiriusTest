@@ -8,6 +8,8 @@ import {AppImage} from "../components/AppImage";
 type Props = NativeStackScreenProps<RootStackParamList, 'Marked'>;
 
 export const Marked = ({navigation}: Props) => {
+
+    //моковые данные для проверки отображения
     const mok = {
         '3464632': 'like',
         '3509971': 'like',
@@ -42,6 +44,11 @@ export const Marked = ({navigation}: Props) => {
                 keyExtractor={item => item.id}
                 numColumns={4}
                 columnWrapperStyle={{justifyContent: 'flex-start'}}
+                ListEmptyComponent={() => (
+                    <View style={styles.center}>
+                        <Text style={styles.text}>Вы пока не добавили ничего в избранное</Text>
+                    </View>
+                )}
             />
         </View>
     )

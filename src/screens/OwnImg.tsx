@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, View, Text, Button, Image, Dimensions, TouchableOpacity} from 'react-native'
+import {StyleSheet, View, Text, Image, Dimensions, TouchableOpacity} from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {RootStackParamList} from "./RootStackPrams";
 import {Heart} from "../svg/Heart";
@@ -7,7 +7,7 @@ import {Trash} from "../svg/Trash";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Own'>;
 
-export const OwnImg = ({navigation, route}: Props) => {
+export const OwnImg = ({route}: Props) => {
     const {url, like}:any = route.params
 
     return (

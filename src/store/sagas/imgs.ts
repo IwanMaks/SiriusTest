@@ -7,16 +7,18 @@ import {
     loadImgError,
     loadImgSuccess
 } from "../actions/imgs";
-import { createClient } from 'pexels';
+import {createClient, Photos} from 'pexels';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {ACTION} from "../types";
+import {API_KEY} from '@env'
 
-const client = createClient('563492ad6f917000010000018bb17ad50e45485d98affbb3d760d67b');
+const client = createClient(API_KEY);
 const query = 'Nature';
 
 export function* watchFetchImg() {
     yield all([
-        takeEvery('FETCH_IMG', fetchImgAsync),
-        takeEvery('FETCH_LIKE_DEL', fetchLikeDelAsync)
+        takeEvery(ACTION.FETCH_IMG, fetchImgAsync),
+        takeEvery(ACTION.FETCH_LIKE_DEL, fetchLikeDelAsync)
     ])
 }
 
@@ -24,6 +26,7 @@ function* fetchImgAsync(): Generator {
     try {
         yield put(loadImg())
         const data = yield call(() => {
+            //Если подставить тип Photos из pexels, то выдаёт ошибку
             return client.photos.search({ query, per_page: 50 }).then((photos:any) => photos.photos);
         })
         yield put(loadImgSuccess(data))

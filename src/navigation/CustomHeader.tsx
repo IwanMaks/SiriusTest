@@ -1,5 +1,5 @@
 import React from "react";
-import {ScrollView, StyleSheet, View, Text, Platform} from 'react-native'
+import { StyleSheet, View, Platform} from 'react-native'
 import LinearGradient from "react-native-linear-gradient";
 import {Header, HeaderBackButton} from "@react-navigation/elements";
 import {useNavigation, useRoute} from "@react-navigation/native";
@@ -10,7 +10,7 @@ type HeaderProps = {
 
 export const CustomHeader = ({title = 'Введите title'}: HeaderProps) => {
     const nav = useNavigation()
-    const route:any = useRoute()
+    const route:any = useRoute() //без any ts ругается на title
 
     return (
         <View style={route.name === 'Own' ? styles.headerWrapBlack : styles.headerWrapWhite}>
